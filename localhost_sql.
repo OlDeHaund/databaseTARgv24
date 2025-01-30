@@ -1,0 +1,26 @@
+CREATE TABLE film(
+filmID int PRIMARY KEY AUTO_INCREMENT,
+filmNimetus varchar(30) not null, 
+aasta int,
+eelarveHind decimal(7,1));
+
+CREATE TABLE zanr(
+zanrID int PRIMARY KEY AUTO_INCREMENT,
+zanrNimetus varchar(20) UNIQUE)
+
+
+Insert into zanr(zanrNimetus)
+VALUES ('Drama'),('Seisklus'),('Detektive'),('Horror'),('Multik')
+Select * From zanr;
+
+--tabeli film struktuuri muutmine --> uue veergu lisamine
+ALTER TABLE film ADD zanrID int;
+SELECT * FROM film; 
+
+--tabeli film skruktuuri muutmine --> FK lisamine, mis on seotud tabeliga zanr (zanrID)
+ALTER TABLE film ADD CONSTRAINT fk_zanr
+FOREIGN KEY (zanrID) REFERENCES zanr(zanrID);
+
+SELECT * FROM film;
+SELECT * FROM zanr;
+UPDATE film SET zanrID = 1 WHERE filmID = 3
